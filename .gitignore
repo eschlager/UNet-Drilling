@@ -5,7 +5,7 @@ data/*
 **/.idea/*
 /notebooks*
 dissemination/*
-!dissemination/figures/*
+!dissemination/figures
 /tiler*
 Overview.xlsx
 
