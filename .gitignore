@@ -4,8 +4,7 @@ data/*
 **/.ipynb_checkpoints/*
 **/.idea/*
 /notebooks*
-dissemination/*
-!dissemination/figures
+/dissemination/*
 /tiler*
 Overview.xlsx
 
