@@ -4,9 +4,10 @@ data/*
 **/.ipynb_checkpoints/*
 **/.idea/*
 /notebooks*
-/dissemination
+dissemination/*
+!dissemination/figures/*
 /tiler*
 Overview.xlsx
-!dissemination/figures/*
+
 /output*
 **/__pycache__/*
