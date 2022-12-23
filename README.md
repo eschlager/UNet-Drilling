@@ -18,6 +18,7 @@ Based on the two different wear types, the code can be used in 4 different modes
 * mode 3: build-up-edge and abrasive wear as distinct classes (multi class problem)
 
 
+
 Furthermore, three different types of loss functions are used:
 * Cross Entropy
 * Focal Crossentropy
