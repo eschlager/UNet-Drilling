@@ -8,7 +8,7 @@ The microscopic images of cutting inserts of drilling tools have dimensions reac
 
 To process this high resolution images, the overlap-tile strategy is applied as proposed in [Ronneberger et. al: U-Net: Convolutional Networks for Biomedical Image Segmentation](https://doi.org/10.1007/978-3-319-24574-4_28). Thus, for training and evaluation, the images are cut into a large number of smaller tiles which can easily be easily processed. The preprocessing pipeline can apply several augmentation techniques of varying intensity.
 
-<img src="https://github.com/eschlager/UNet-Drilling/main/figures/flowchart_augmentation.jpg" height="200"> 
+<img src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/flowchart_augmentation.jpg" height="200"> 
 
 
 Based on the two different wear types, the code can be used in 4 different modes: 
