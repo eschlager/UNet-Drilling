@@ -1,0 +1,12 @@
+/git_ignore/*
+
+data/*
+**/.ipynb_checkpoints/*
+**/.idea/*
+/notebooks*
+/dissemination*
+/tiler*
+Overview.xlsx
+!dissemination/figures/*
+/output*
+**/__pycache__/*
