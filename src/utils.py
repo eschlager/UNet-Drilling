@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patheffects as path_effects
 import numpy as np
 import tensorflow as tf
-from focal_loss import SparseCategoricalFocalLoss  # https://pypi.org/project/focal-loss/
+from focal_loss import SparseCategoricalFocalLoss
 
 
 def predict_cat(model, x, batch_size, thresh=.5):

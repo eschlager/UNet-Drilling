@@ -29,15 +29,14 @@ matplotlib.use('Agg')
 script_dir = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(os.path.sep.join([script_dir, 'src']))
 sys.path.append(os.path.sep.join([script_dir, 'unet']))
-sys.path.append(os.path.sep.join([script_dir, 'evaluation']))
+sys.path.append(os.path.sep.join([script_dir, 'evaluate']))
 
 import logging_config
-from utils_unet import reset_weights, MyLogger
-from common_data_paths import get_base_path_for_current_host
-import unet
-from data_loader import DataLoader
 import utils
-import evaluate_model
+from data_loader import DataLoader
+import unet
+from utils_unet import reset_weights, MyLogger
+import evaluate_cv
 
 from tensorflow.python.data.util import options as options_lib
 from tensorflow.data.experimental import DistributeOptions, AutoShardPolicy
@@ -50,6 +49,8 @@ DistributeOptions.auto_shard_policy = options_lib.create_option(
     default_factory=lambda: AutoShardPolicy.DATA,
 )
 
+
+home_dir = script_dir
 
 def build_network(input_shape, num_classes):
     model = unet.U_Net(input_shape, num_classes)
@@ -70,8 +71,8 @@ def data_generator(images, masks, batch_size, epochs):
 
 def main(args):
     start_time = time.time()
-    path = get_base_path_for_current_host()
-    out_dir = os.sep.join([path, args.out_path])
+
+    out_dir = os.sep.join([home_dir, args.model_path])
     os.makedirs(out_dir, exist_ok=True)
     logging_config.define_root_logger(os.path.join(out_dir, f'log.txt'))
 
@@ -90,7 +91,7 @@ def main(args):
         logging.info(f'Used weights of averaging {weights}.')
 
     # Load data
-    in_dir = os.sep.join([path, args.in_path])
+    in_dir = os.sep.join([home_dir, args.data_path])
     size = int(in_dir.split('_')[-1])
     images, masks = load_data(in_dir, size, args.wear_mode)
 
@@ -249,8 +250,8 @@ def main(args):
     tf.keras.backend.clear_session()
 
     # apply evaluation on images in eval_data_folder
-    eval_data_folder = os.path.join(os.path.dirname(args.in_path), f'dev_centertiles_{size}')
-    evaluate_model.main(args.gpu_id, args.out_path, eval_data_folder)
+    eval_data_folder = os.path.join(os.path.dirname(args.data_path), f'dev_centertiles_{size}')
+    evaluate_cv.main(args.gpu_id, args.model_path, eval_data_folder)
 
     return locals()
 
@@ -260,12 +261,12 @@ def set_parser():
     Define argument parser with default arguments
     """
     parser = argparse.ArgumentParser(description='train_unet')
-    parser.add_argument('--gpu_id', default="5,6", type=str)
-    parser.add_argument('--in_path', default='data/images/interim/train_alittleaugmented_256', type=str,
+    parser.add_argument('--gpu_id', default="1,2", type=str)
+    parser.add_argument('--data_path', default='data/interim/train_alittleaugmented_512', type=str,
                         help='Input path of train data.')
-    parser.add_argument('--out_path', default='output/image_segmentation/finalbn_256_alittleaug_iou_2_00', type=str,
-                        help='Output path where results are stored.')
-    parser.add_argument('--wear_mode', default=2, type=int, help='Define which wear types should be trained: ´\n'
+    parser.add_argument('--model_path', default='models/unetbn_alittleaug_iou_3_00', type=str,
+                        help='Path where trained models are stored.')
+    parser.add_argument('--wear_mode', default=3, type=int, help='Define which wear types should be trained: ´\n'
                                                                  '0 - build-up-edge\n'
                                                                  '1 - abrasive wear\n'
                                                                  '2 - both as one label\n'
@@ -274,7 +275,7 @@ def set_parser():
                         help="cross_entropy, focal_cross_entropy, or iou_loss.")
     parser.add_argument('--num_folds', default=1, type=int)
     parser.add_argument('--epochs', default=300, type=int)
-    parser.add_argument('--batch_size', default=32, type=int)
+    parser.add_argument('--batch_size', default=16, type=int)
     parser.add_argument('--learning_rate', default=1e-4, type=float)
     parser.add_argument('--restart', default=True, type=bool, help="True or False")
     parser.add_argument('--restart_thresh', default=.4, type=float)
