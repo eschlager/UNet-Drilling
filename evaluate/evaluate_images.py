@@ -102,7 +102,10 @@ def main(gpu_id, data_path, model_path, batch_size):
     # directory of models to evaluate
     model_dir = os.path.join(home_dir, model_path)
 
-    out_dir = os.path.join(home_dir, "evaluation", 'model_' + os.path.basename(os.path.dirname(model_dir))+'_' + os.path.basename(os.path.normpath(model_dir)), 'images_' + os.path.basename(os.path.normpath(data_path)))
+    out_dir = os.path.join(home_dir, "evaluation",
+                           'model_' + os.path.basename(os.path.dirname(model_dir)),
+                           'images_' + os.path.basename(os.path.normpath(data_path)) + '_' +
+                           os.path.basename(os.path.normpath(model_dir)))
     os.makedirs(out_dir, exist_ok=True)
 
     logging_config.define_root_logger(os.path.join(out_dir, f"log_predict_images.txt"))
