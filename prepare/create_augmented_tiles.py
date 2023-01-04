@@ -19,7 +19,7 @@ import numpy as np
 from PIL import Image, ImageEnhance, ImageFilter
 
 script_dir = os.path.abspath(os.path.dirname(__file__))
-sys.path.append(os.path.sep.join([script_dir, 'src']))
+sys.path.append(os.path.sep.join([script_dir, '..', 'src']))
 import logging_config
 
 
@@ -105,11 +105,13 @@ def tile(filename, dir_in, dir_out, d, overlap=0, rot=None, contrast=None, brigh
                 logging.info('  Tile does not contain any labelled part after the processing. Skip this tile.')
 
 
+path = os.path.abspath(os.pardir)
+
 img_folder = 'dev'
 tile_size = 512
 
-path_img = os.path.join('..', '..', '..', 'data', 'images', 'raw', img_folder)
-path_out = os.path.join('..', '..', '..', 'data', 'images', 'interim', f'{img_folder}_augmented_{tile_size}')
+path_img = os.path.join(path, 'data', 'raw', img_folder)
+path_out = os.path.join(path, 'data', 'interim', f'{img_folder}_augmented_{tile_size}')
 os.makedirs(path_out, exist_ok=True)
 
 logging_config.define_root_logger(os.path.join(path_out, f'log.txt'))
