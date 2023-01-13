@@ -8,9 +8,9 @@ For training, the script `prepare/create_augmented_tiles.py` cuts smaller (overl
 
 <img src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/flowchart_augmentation.jpg" height="350"> 
 
-We distinguish two types of wear: abrasive wear, and build-up-edge, which are labeled in different colours. Routines in `src/data_loader.py` and `src/utils.py` are specific to these colour labels and have to be adjusted when applied to different coloured masks.
+We distinguish two types of wear: abrasive wear, coloured in blue, and build-up-edge, coloured in yellow. Routines in `src/data_loader.py` and `src/utils.py` are specific to these colour labels and have to be adjusted when applied to different coloured masks.
 
-<img src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/SONT_072907_ER_M30_CTPP430_90Bo_A.jpg" height="150">  <img src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/SONT_072907_ER_M30_CTPP430_90Bo_A_masked.jpg" height="150"> 
+<img alt="Original microscopic image" src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/SONT_072907_ER_M30_CTPP430_90Bo_A.jpg" height="150">  <img alt="Associated labeled mask" src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/SONT_072907_ER_M30_CTPP430_90Bo_A_masked.jpg" height="150"> 
 
 
 ## Training
