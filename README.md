@@ -2,13 +2,20 @@
 
 This repo contains the code accompanying our paper [Evaluation of Data Augmentation and Loss Functions in Semantic Image Segmentation for Drilling Tool Wear Detection](https://arxiv.org/??????).
 
-
-The microscopic images of cutting inserts of drilling tools have dimensions reaching from 4750 x 1200 pixels where 1 pixel equals 1.493μm, up to 11500 x 1500 pixels where 1 pixel equals 0.781μm. We distinguish two types of wear: abrasive wear, and build-up-edge, which are labeled in different colours.
-
-
-To process this high resolution images, the overlap-tile strategy is applied as proposed in [Ronneberger et. al: U-Net: Convolutional Networks for Biomedical Image Segmentation](https://doi.org/10.1007/978-3-319-24574-4_28). Thus, for training and evaluation, the images are cut into a large number of smaller tiles which can easily be easily processed. The preprocessing pipeline can apply several augmentation techniques of varying intensity.
+## Data and Data preparation
+The microscopic images of cutting inserts of drilling tools have dimensions reaching from 4750 x 1200 pixels, up to 11500 x 1500 pixels. To process such high resolution images in U-Net, they are partitioned into smaller tiles. 
+For training, the script `prepare/create_augmented_tiles.py` cuts smaller (overlapping) tiles from the whole images, and applies several augmentation techniques:
 
 <img src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/flowchart_augmentation.jpg" height="350"> 
+
+We distinguish two types of wear: abrasive wear, and build-up-edge, which are labeled in different colours. Routines in `src/data_loader.py` and `src/utils.py` are specific to these colour labels and have to be adjusted when applied to different coloured masks.
+
+<img src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/SONT_072907_ER_M30_CTPP430_90Bo_A.jpg" height="150">  <img src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/SONT_072907_ER_M30_CTPP430_90Bo_A_masked.jpg" height="150"> 
+
+
+## Training
+
+Training (with cross validation) is performed in `train_unet.py`.
 
 
 Based on the two different wear types, the code can be used in 4 different modes: 
@@ -18,11 +25,23 @@ Based on the two different wear types, the code can be used in 4 different modes
 * mode 3: build-up-edge and abrasive wear as distinct classes (multi class problem)
 
 
-
 Furthermore, three different types of loss functions are used:
 * Cross Entropy
 * Focal Crossentropy
 * IoU-based loss
+
+At the end of the training, the evaluation script is started, evaluating the trained models on an unseen development set, which has to be prepared using `prepare/create_augmented_tiles.py`.
+
+
+
+## Predicting 
+
+For predicting whole images, the overlap-tile strategy is applied as proposed in [Ronneberger et. al: U-Net: Convolutional Networks for Biomedical Image Segmentation](https://doi.org/10.1007/978-3-319-24574-4_28). 
+The pipeline in `predictor.py` can be run in mode 0, which stores the predicted masks only, or in mode 1, which adds the predicted mask to the original image.
+
+
+
+
 
 
 
