@@ -10,8 +10,10 @@ For training, the script `prepare/create_augmented_tiles.py` cuts smaller (overl
 
 We distinguish two types of wear: abrasive wear, coloured in blue, and build-up-edge, coloured in yellow. Routines in `src/data_loader.py` and `src/utils.py` are specific to these colour labels and have to be adjusted when applied to different coloured masks.
 
-<img alt="Original microscopic image" src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/SONT_072907_ER_M30_CTPP430_90Bo_A.jpg" height="150">  <img alt="Associated labeled mask" src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/SONT_072907_ER_M30_CTPP430_90Bo_A_masked.jpg" height="150"> 
-
+<picture>
+	<img alt="Original microscopic image" src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/SONT_072907_ER_M30_CTPP430_90Bo_A.jpg" height="100">
+	<img alt="Associated labeled mask" src="https://github.com/eschlager/UNet-Drilling/blob/main/figures/SONT_072907_ER_M30_CTPP430_90Bo_A_masked.jpg" height="100"> 
+</picture>
 
 ## Training
 
