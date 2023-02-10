@@ -1,6 +1,6 @@
 # U-Net for Semantic Image Segmentation on Microscopic Drilling Tool Images for Wear Detection
 
-This repo contains the code accompanying our paper [Evaluation of Data Augmentation and Loss Functions in Semantic Image Segmentation for Drilling Tool Wear Detection](https://arxiv.org/??????).
+This repo contains the code accompanying our paper "Evaluation of Data Augmentation and Loss Functions in Semantic Image Segmentation for Drilling Tool Wear Detection"
 
 ## Data and Data preparation
 The microscopic images of cutting inserts of drilling tools have dimensions reaching from 4750 x 1200 pixels, up to 11500 x 1500 pixels. To process such high resolution images in U-Net, they are partitioned into smaller tiles. 
@@ -40,20 +40,3 @@ At the end of the training, the evaluation script is started, evaluating the tra
 
 For predicting whole images, the overlap-tile strategy is applied as proposed in [Ronneberger et. al: U-Net: Convolutional Networks for Biomedical Image Segmentation](https://doi.org/10.1007/978-3-319-24574-4_28). 
 The pipeline in `predictor.py` can be run in mode 0, which stores the predicted masks only, or in mode 1, which adds the predicted mask to the original image.
-
-
-
-
-
-
-
-### Citation 
-If you find this code useful, please consider citing our work:
-```
-@article{UNetDrilling,
-  title={Evaluation of Data Augmentation and Loss Functions in Semantic Image Segmentation for Drilling Tool Wear Detection},
-  author={Elke Schlager AND Andreas Windisch},
-  journal={arXiv preprint arXiv:????.????},
-  year={2023}
-}
-```
