@@ -1,6 +1,6 @@
 # U-Net for Semantic Image Segmentation on Microscopic Drilling Tool Images for Wear Detection
 
-This repo contains the code accompanying our paper [Evaluation of Data Augmentation and Loss Functions in Semantic Image Segmentation for Drilling Tool Wear Detection](https://arxiv.org/abs/2302.05262).
+This repo contains the code accompanying our paper [Evaluation of Data Augmentation and Loss Functions in Semantic Image Segmentation for Drilling Tool Wear Detection](https://doi.org/10.1007/s10845-023-02313-y).
 
 ## Data and Data preparation
 The microscopic images of cutting inserts of drilling tools have dimensions reaching from 4750 x 1200 pixels, up to 11500 x 1500 pixels. To process such high resolution images in U-Net, they are partitioned into smaller tiles. 
